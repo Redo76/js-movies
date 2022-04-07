@@ -1,13 +1,12 @@
 // Déclaration des variables :
+const main = document.querySelector("main");
 const backdrop = document.getElementById("backdrop");
 const addMovie = document.getElementById("addMovie");
 const modal = document.getElementById("add-modal");
 const cancel = document.getElementsByClassName("btn--passive");
 const add = document.querySelector(".btn--success");
-
-
-
-const warning = document.createElement("div");
+const entryText = document.getElementById("entry-text");
+const section = document.createElement("section");
 
 // Déclaration des fonctions :
 function removeModal() {
@@ -19,7 +18,10 @@ function ajouterMovie() {
     let title = document.getElementById("title").value;
     let imageUrl = document.getElementById("image-url").value;
     let rating = document.getElementById("rating").value;
-    
+    document.main.appendChild(section);
+    section.classList.add("movie-element");
+    section.innerHTML = `${imageUrl} ${title} ${rating}`;
+    removeModal();
 }
 // Début du code :
 
@@ -40,6 +42,6 @@ add.addEventListener("click", () =>{
     if (rating === "" || rating > 5){
         alert("Please enter valid values (rating between 1 and 5).")
     }
-
+    ajouterMovie();
 })
 
