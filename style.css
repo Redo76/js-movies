@@ -235,6 +235,10 @@
     flex-direction: column;
   }
   
+  .warning{
+    display: block;
+    margin: auto;
+  }
   @media (min-width: 768px) {
     .modal {
       width: 40rem;
