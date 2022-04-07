@@ -1,14 +1,24 @@
-const title = document.querySelector("h1");
-const button = document.querySelector("button");
-const backdrop = document.querySelector(".backdrop");
+// Déclaration des variables:
+const backdrop = document.getElementById("backdrop");
+const addMovie = document.getElementById("addMovie");
+const modal = document.getElementById("add-modal");
+const cancel = document.getElementsByClassName("btn--passive");
+const title = document.getElementById("title");
+const imageUrl = document.getElementById("image-url");
 
 
-button.addEventListener("click", function (){
-    title.classList.toggle("h1blue");
-})
-
-
-
-backdrop.addEventListener("click", function (){
+function removeModal() {
+    modal.style.display = "none";
     backdrop.style.display = "none";
+}
+
+addMovie.addEventListener("click", () =>{
+    backdrop.style.display = "block";
+    modal.style.display = "block";
 })
+
+cancel[0].addEventListener("click", () =>{
+    removeModal();
+})
+
+
