@@ -1,28 +1,33 @@
 // Déclaration des variables ************************************************************************************
 const main = document.querySelector("main");
 const backdrop = document.getElementById("backdrop");
-const addMovie = document.getElementById("addMovie");
+const addMovie = document.querySelector("header button");
 const addModal = document.getElementById("add-modal");
-const suppMovie = document.createElement("div");
 const deleteModal = document.getElementById("delete-modal");
+
 
 const cancel = document.getElementsByClassName("btn--passive");
 const add = document.querySelector(".btn--success");
+const yes = document.querySelector(".btn--danger");
 const entryText = document.getElementById("entry-text");
-const section = document.createElement("section");
+const section = document.querySelector(".card"); 
 
+const addSection = document.createElement("section");
 
 // Déclaration des fonctions *************************************************************************************
 
-/*On crée une fonction qui permet de fermer la modal */
+/*On crée une fonction qui permet de fermer la modal du formulaire */
 function removeModal() {
     addModal.style.display = "none";
     backdrop.style.display = "none";
 }
 
-function retirerMovie() {
-    entryText.style.display = "none";
+/*On crée une fonction qui permet de fermer la modal de suppression*/
+function removeSuppModal(){
+    deleteModal.style.display = "none";
+    backdrop.style.display = "none";
 }
+
 
 function ajouterMovie() {
     let title = document.getElementById("title").value;
@@ -30,28 +35,30 @@ function ajouterMovie() {
     let rating = document.getElementById("rating").value;
     
 
-    main.appendChild(section);
-    section.setAttribute("class", "movie-element");
-    section.setAttribute("id", "entry-text");
+    const addSection = document.createElement("section");
+    main.appendChild(addSection);
+    addSection.setAttribute("class", "movie-element");
+    addSection.setAttribute("id", "entry-text");
     
     const img = document.createElement("img");
     img.setAttribute("class", "movie-element__image");
     img.innerHTML = imageUrl;
-    section.appendChild(img);
+    addSection.appendChild(img);
 
     const h2 = document.createElement("h2");
     h2.setAttribute("class", "h2");
     h2.innerHTML = title;
-    section.appendChild(h2);
+    addSection.appendChild(h2);
 
     const p = document.createElement("p");
     p.setAttribute("class", "p");
     p.innerHTML = `${rating}/5 stars`;
-    section.appendChild(p);
+    addSection.appendChild(p);
 
-    suppMovie.style.width = "30%";
-    suppMovie.style.height = "100%";
-    section.appendChild(suppMovie);
+    const suppDiv = document.createElement("div");
+    suppDiv.style.width = "30%";
+    suppDiv.style.height = "100%";
+    addSection.appendChild(suppDiv);
 
     removeModal();
 }
@@ -74,6 +81,7 @@ document.addEventListener("click", (e) =>{
     else if (e.target == cancel || !e.target.closest("#add-modal")){ // La méthode closest récupére l'ancetre le plus proche ou le parent de l'élément correspondant aux sélecterus
         removeModal();
     }
+    console.log(e.target);
 })
 
 add.addEventListener("click", () =>{
@@ -81,18 +89,22 @@ add.addEventListener("click", () =>{
     if (rating <= 0 || rating > 5){
         alert("Please enter valid values (rating between 1 and 5).")
     } else {
-        retirerMovie();
+        entryText.style.display = "none";
         ajouterMovie();
     }
-    
 })
 
 section.addEventListener("click", () =>{
     deleteModal.style.display = "block";
     backdrop.style.display = "block";
+    console.log(231);
 })
 
 cancel[1].addEventListener("click", () =>{
-    
+    removeSuppModal();
 })
 
+yes.addEventListener("click", () =>{
+    removeSuppModal();
+    main.removeChild(section)
+})
